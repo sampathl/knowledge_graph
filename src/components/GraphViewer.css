@@ -1,0 +1,144 @@
+.graph-viewer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.graph-controls {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.add-node-section {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex: 1;
+  max-width: 400px;
+}
+
+.add-node-section .input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.selected-node-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.selected-node-info h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.graph-container {
+  flex: 1;
+  position: relative;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.graph-container canvas {
+  display: block;
+}
+
+.chat-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .chat-overlay {
+    width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .graph-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .add-node-section {
+    max-width: none;
+  }
+  
+  .selected-node-info {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .chat-overlay {
+    width: 100%;
+    height: 60%;
+    top: auto;
+    bottom: 0;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Graph Node Styling */
+.graph-container .node {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.graph-container .node:hover {
+  filter: brightness(1.2);
+}
+
+.graph-container .node.selected {
+  filter: brightness(1.5);
+  stroke: var(--accent-color);
+  stroke-width: 3;
+}
+
+/* Graph Edge Styling */
+.graph-container .link {
+  transition: opacity 0.2s ease;
+}
+
+.graph-container .link:hover {
+  opacity: 0.8;
+}
