@@ -22,5 +22,34 @@
 </head>
 <body>
     <div id="root"></div>
+    <script>
+        console.log('📄 HTML loaded successfully');
+        console.log('🌐 Current URL:', window.location.href);
+        console.log('📦 Bundle script should load next...');
+        
+        // Global error handler
+        window.addEventListener('error', function(e) {
+            console.error('❌ JavaScript Error:', e.error);
+            console.error('❌ Error details:', e.filename, e.lineno, e.colno);
+        });
+        
+        // Unhandled promise rejection handler
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('❌ Unhandled Promise Rejection:', e.reason);
+        });
+        
+        // Check if bundle.js loads
+        window.addEventListener('load', function() {
+            console.log('🔄 Window load event fired');
+            setTimeout(function() {
+                if (document.getElementById('root').innerHTML.trim() === '') {
+                    console.error('❌ Root element is still empty after load!');
+                    console.log('🔍 Root element content:', document.getElementById('root').innerHTML);
+                } else {
+                    console.log('✅ Root element has content!');
+                }
+            }, 1000);
+        });
+    </script>
 </body>
 </html>

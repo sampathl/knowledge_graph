@@ -41,6 +41,8 @@ const Navigation: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  console.log('🚀 App component initializing...');
+  
   const [appState, setAppState] = useState<AppState>({
     graph: { nodes: [], edges: [] },
     selectedNode: null,
@@ -52,25 +54,36 @@ const App: React.FC = () => {
       defaultAIService: 'openai'
     }
   });
+  
+  console.log('📊 Initial app state:', appState);
 
   // Load initial data from storage
   useEffect(() => {
+    console.log('🔄 Loading initial data from storage...');
     const loadInitialData = () => {
-      const graphData = storage.graph.load();
-      const chatHistory = storage.chat.load();
-      const aiServices = storage.aiServices.load();
-      const settings = storage.settings.load();
+      try {
+        const graphData = storage.graph.load();
+        const chatHistory = storage.chat.load();
+        const aiServices = storage.aiServices.load();
+        const settings = storage.settings.load();
+        
+        console.log('📦 Loaded data:', { graphData, chatHistory, aiServices, settings });
 
-      setAppState(prev => ({
-        ...prev,
-        graph: graphData,
-        chatSessions: chatHistory,
-        aiServices: aiServices.length > 0 ? aiServices : [
-          { name: 'openai', apiKey: '', model: 'gpt-3.5-turbo', isEnabled: false },
-          { name: 'gemini', apiKey: '', model: 'gemini-pro', isEnabled: false }
-        ],
-        settings
-      }));
+        setAppState(prev => ({
+          ...prev,
+          graph: graphData,
+          chatSessions: chatHistory,
+          aiServices: aiServices.length > 0 ? aiServices : [
+            { name: 'openai', apiKey: '', model: 'gpt-3.5-turbo', isEnabled: false },
+            { name: 'gemini', apiKey: '', model: 'gemini-pro', isEnabled: false }
+          ],
+          settings
+        }));
+        
+        console.log('✅ App state updated successfully');
+      } catch (error) {
+        console.error('❌ Error loading initial data:', error);
+      }
     };
 
     loadInitialData();
@@ -109,6 +122,8 @@ const App: React.FC = () => {
     setAppState(prev => ({ ...prev, settings: newSettings }));
   };
 
+  console.log('🎨 Rendering App component...');
+  
   return (
     <Router>
       <div className={`app ${appState.settings.theme}`}>
