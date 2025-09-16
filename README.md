@@ -13,7 +13,7 @@ An interactive web application for creating, exploring, and interacting with kno
 
 ## Live Demo
 
-🌐 **[View Live Demo](https://yourusername.github.io/knowledge-graph/)**
+🌐 **[View Live Demo](https://sampathl.github.io/knowledge_graph/)**
 
 ## Local Development
 
@@ -55,7 +55,7 @@ The application will open at `http://localhost:3001`
 
 1. Push your code to the `main` branch
 2. GitHub Actions will automatically build and deploy to GitHub Pages
-3. Your app will be available at `https://yourusername.github.io/knowledge-graph/`
+3. Your app will be available at `https://sampathl.github.io/knowledge_graph/`
 
 ### Manual Deployment
 

@@ -21,12 +21,12 @@ npm run deploy
 ## URL Structure
 
 Your app will be available at:
-- **GitHub Pages**: `https://yourusername.github.io/knowledge-graph/`
+- **GitHub Pages**: `https://sampathl.github.io/knowledge_graph/`
 - **Local Development**: `http://localhost:3001`
 
 ## Important Notes
 
-- The app is configured to work with the `/knowledge-graph/` subpath
+- The app is configured to work with the `/knowledge_graph/` subpath
 - All assets are properly configured for GitHub Pages
 - React Router is set up to handle client-side routing
 - The build process optimizes for production

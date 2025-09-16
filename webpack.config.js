@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
-  const publicPath = isProduction ? '/knowledge-graph/' : '/';
+  const publicPath = isProduction ? '/knowledge_graph/' : '/';
   
   return {
     mode: argv.mode || 'development',
