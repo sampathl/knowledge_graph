@@ -110,7 +110,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <Router>
+    <Router basename="/knowledge-graph">
       <div className={`app ${appState.settings.theme}`}>
         <Navigation />
         <main className="main-content">
