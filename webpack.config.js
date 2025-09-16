@@ -34,6 +34,7 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: './public/index.html',
         publicPath: publicPath,
+        filename: 'index.html',
       }),
     ],
     devServer: {

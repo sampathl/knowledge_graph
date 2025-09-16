@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { GraphViewer } from './components/GraphViewer';
 import { ChatHistory } from './components/ChatHistory';
 import { APISettings } from './components/APISettings';
@@ -110,7 +110,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <Router basename="/knowledge-graph">
+    <Router>
       <div className={`app ${appState.settings.theme}`}>
         <Navigation />
         <main className="main-content">
