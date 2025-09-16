@@ -41,6 +41,13 @@
   font-size: 1.1rem;
 }
 
+.connection-hint {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
 .graph-container {
   flex: 1;
   position: relative;

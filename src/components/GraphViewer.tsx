@@ -49,6 +49,12 @@ export const GraphViewer: React.FC<GraphViewerProps> = ({
     }
   }, [graphData.nodes, onNodeSelect]);
 
+  // Handle background click to deselect node
+  const handleBackgroundClick = useCallback(() => {
+    onNodeSelect(null);
+    setShowChat(false);
+  }, [onNodeSelect]);
+
   // Handle node drag
   const handleNodeDrag = useCallback((node: any, translate: any) => {
     setGraphData(prev => ({
@@ -74,10 +80,25 @@ export const GraphViewer: React.FC<GraphViewerProps> = ({
       size: 20
     };
 
-    const newGraph = {
+    let newGraph = {
       ...graphData,
       nodes: [...graphData.nodes, newNode]
     };
+
+    // If a node is selected, connect the new node to it
+    if (selectedNode) {
+      const newEdge: GraphEdge = {
+        id: generateId(),
+        source: selectedNode.id,
+        target: newNode.id,
+        strength: 1
+      };
+      
+      newGraph = {
+        ...newGraph,
+        edges: [...newGraph.edges, newEdge]
+      };
+    }
 
     setGraphData(newGraph);
     onGraphUpdate(newGraph);
@@ -137,19 +158,20 @@ export const GraphViewer: React.FC<GraphViewerProps> = ({
           <input
             type="text"
             className="input"
-            placeholder="Enter new topic/node name..."
+            placeholder={selectedNode ? `Connect to "${selectedNode.label}"...` : "Enter new topic/node name..."}
             value={newNodeInput}
             onChange={(e) => setNewNodeInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleAddNode()}
           />
           <button className="button" onClick={handleAddNode}>
-            Add Node
+            {selectedNode ? 'Add Connected Node' : 'Add Node'}
           </button>
         </div>
         
         {selectedNode && (
           <div className="selected-node-info">
             <h3>Selected: {selectedNode.label}</h3>
+            <p className="connection-hint">New nodes will be connected to this node</p>
             <button 
               className="button secondary" 
               onClick={() => handleRemoveNode(selectedNode.id)}
@@ -174,6 +196,7 @@ export const GraphViewer: React.FC<GraphViewerProps> = ({
           linkWidth={1}
           onNodeClick={handleNodeClick}
           onNodeDrag={handleNodeDrag}
+          onBackgroundClick={handleBackgroundClick}
           cooldownTicks={100}
           nodeCanvasObject={(node: any, ctx: any, globalScale: any) => {
             const label = node.label;

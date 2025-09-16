@@ -7,6 +7,9 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "dev": "webpack serve --mode development --open",
+    "build:gh-pages": "webpack --mode production",
+    "predeploy": "npm run build:gh-pages",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -25,6 +28,7 @@
   "devDependencies": {
     "@types/node": "^24.2.1",
     "css-loader": "^7.1.2",
+    "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.6.3",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.2",
